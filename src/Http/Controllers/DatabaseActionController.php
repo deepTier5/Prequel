@@ -1,7 +1,7 @@
 <?php
-    
+
     namespace Protoqol\Prequel\Http\Controllers;
-    
+
     use Carbon\Carbon;
     use Illuminate\Http\Request;
     use Protoqol\Prequel\Facades\PDB;
@@ -9,21 +9,21 @@
     use Protoqol\Prequel\App\AppStatus;
     use Protoqol\Prequel\Database\Query;
     use Protoqol\Prequel\App\ModelAction;
-    use Protoqol\Prequel\App\SeederAction;
-    use Protoqol\Prequel\App\FactoryAction;
+    use Protoqol\Prequel\Laravel\SeederAction;
+    use Protoqol\Prequel\Laravel\FactoryAction;
     use Illuminate\Database\QueryException;
-    use Protoqol\Prequel\App\ResourceAction;
-    use Protoqol\Prequel\App\MigrationAction;
-    use Protoqol\Prequel\App\ControllerAction;
+    use Protoqol\Prequel\Laravel\ResourceAction;
+    use Protoqol\Prequel\Laravel\MigrationAction;
+    use Protoqol\Prequel\Laravel\ControllerAction;
     use Protoqol\Prequel\Database\DatabaseAction;
-    
+
     /**
      * Class DatabaseActionController
      * @package Protoqol\Prequel\Http\Controllers
      */
     class DatabaseActionController extends Controller
     {
-        
+
         /**
          * Get defaults for 'Insert new row' action form inputs.
          *
@@ -38,7 +38,7 @@
                 'current_date' => Carbon::now()->format('Y-m-d\TH:i'),
             ];
         }
-        
+
         /**
          * Check and return all Laravel specific assets for table (Model, Seeder, Controller etc.).
          *
@@ -58,7 +58,7 @@
                 'factory'    => (new FactoryAction($database, $table))->getQualifiedName(),
             ];
         }
-        
+
         /**
          * Insert row in table.
          *
@@ -73,13 +73,13 @@
             } catch (\Exception $e) {
                 dd($e);
             }
-            
+
             return [
                 'success' => (bool)(new DatabaseAction($request->database, $request->table))
                     ->insertNewRow($request->post('data')),
             ];
         }
-        
+
         /**
          * Run raw SQL query.
          *
@@ -91,7 +91,7 @@
         {
             return (new Query($request))->get();
         }
-        
+
         /**
          * @param string $database
          * @param string $table
@@ -100,7 +100,7 @@
         {
             //
         }
-        
+
         /**
          * @param string $database
          * @param string $table
@@ -109,7 +109,7 @@
         {
             //
         }
-        
+
         /**
          * Get database status.
          * @return array
@@ -118,7 +118,7 @@
         {
             return (new AppStatus())->getStatus();
         }
-        
+
         /**
          * Run pending migrations.
          *
@@ -131,7 +131,7 @@
         {
             return (new MigrationAction($database, $table))->run();
         }
-        
+
         /**
          * Reset latest migrations.
          *
@@ -144,7 +144,7 @@
         {
             return (new MigrationAction($database, $table))->reset();
         }
-        
+
         /**
          * Generate controller.
          *
@@ -158,7 +158,7 @@
         {
             return (new ControllerAction($database, $table))->generate();
         }
-        
+
         /**
          * Generate factory.
          *
@@ -172,7 +172,7 @@
         {
             return (new FactoryAction($database, $table))->generate();
         }
-        
+
         /**
          * Generate model.
          *
@@ -185,7 +185,7 @@
         {
             return (new ModelAction($database, $table))->generate();
         }
-        
+
         /**
          * Generate resource.
          *
@@ -199,7 +199,7 @@
         {
             return (new ResourceAction($database, $table))->generate();
         }
-        
+
         /**
          * Generate seeder.
          *
@@ -213,7 +213,7 @@
         {
             return (new SeederAction($database, $table))->generate();
         }
-        
+
         /**
          * Run seeder.
          *

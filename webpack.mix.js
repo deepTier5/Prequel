@@ -12,7 +12,7 @@ const MonacoEditorPlugin = require('monaco-editor-webpack-plugin')
  |
  */
 
-mix.setResourceRoot('packages/protoqol/prequel').
+mix.setResourceRoot('packages/protoqol/prequel/public/build').
   webpackConfig({
     plugins: [
       new MonacoEditorPlugin({
