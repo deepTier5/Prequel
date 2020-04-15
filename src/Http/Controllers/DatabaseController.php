@@ -5,7 +5,7 @@ namespace Protoqol\Prequel\Http\Controllers;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Route;
-use Protoqol\Prequel\App\AppStatus;
+use Protoqol\Prequel\Laravel\AppStatus;
 use Protoqol\Prequel\Laravel\MigrationAction;
 use Protoqol\Prequel\Connection\DatabaseConnector;
 use Protoqol\Prequel\Database\DatabaseTraverser;
